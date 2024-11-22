@@ -3,12 +3,12 @@ import { TBike } from "./bike.interface"
 
 
 
-const createBikeIntoDB = async (studentData: TBike) => {
+const createBikeIntoDB = async (bikeData: TBike) => {
   //built it static method
-  if (await Bike.isUserExists(studentData.name)) {
-    throw new Error('User already exists!!')
+  if (await Bike.isBikeExists(bikeData.name)) {
+    throw new Error('Bike already exists!!')
   }
-  const result = await Bike.create(studentData)
+  const result = await Bike.create(bikeData)
 
   return result
 

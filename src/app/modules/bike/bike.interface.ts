@@ -15,5 +15,5 @@ export type TBike = {
 
 // for creating static
 export interface BikeModel extends Model<TBike> {
-  isUserExists(name: string): Promise<TBike | null>
+  isBikeExists(name: string): Promise<TBike | null>
 }
