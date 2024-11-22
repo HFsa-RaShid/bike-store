@@ -51,7 +51,7 @@ export default [
     rules: {
       ...pluginJs.configs.recommended.rules, 
       ...tseslint.configs.recommended.rules, 
-      "prettier/prettier": "error",
+      // "prettier/prettier": "error",
       "no-unused-vars": "error",
       "no-unused-expressions": "error",
       "prefer-const": "error",
