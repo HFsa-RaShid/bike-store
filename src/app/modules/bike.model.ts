@@ -1,17 +1,6 @@
 import { Schema, model } from 'mongoose';
+import { BikeModel, TBike } from './bike/bike.interface';
 
-
-export type TBike = {
-  name: string;
-  brand: string;
-  price: number;
-  category: string;
-  description: string;
-  quantity: number;
-  inStock: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
 const bikeSchema = new Schema<TBike>(
   {
@@ -33,6 +22,7 @@ const bikeSchema = new Schema<TBike>(
     category: {
       type: String,
       required: [true, 'Bike category is required'],
+      enum: ['Mountain', 'Road', 'Hybrid', 'Electric'], 
       trim: true,
     },
     description: {
@@ -81,4 +71,4 @@ bikeSchema.statics.isBikeExists = async function (name: string) {
 };
 
 
-export const Bike = model<TBike>('Bike', bikeSchema);
+export const Bike = model<TBike, BikeModel >('Bike', bikeSchema)

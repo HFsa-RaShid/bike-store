@@ -10,4 +10,4 @@ router.post('/create-bike', BikeControllers.createBike)
 // router.delete('/:studentId', StudentControllers.deleteStudent)
 // router.get('/', StudentControllers.getAllStudents)
 
-export const StudentRoutes = router
+export const BikeRoutes = router
