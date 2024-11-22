@@ -23,4 +23,6 @@ npm install --save-dev eslint-config-prettier
 
 npm i ts-node-dev --save-dev
 ts-node-dev --respawn --transpile-only src/server.ts
+
+npm install zod
 ```

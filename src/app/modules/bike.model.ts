@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { BikeModel, TBike } from './bike/bike.interface';
 
-
 const bikeSchema = new Schema<TBike>(
   {
     name: {
@@ -22,7 +21,7 @@ const bikeSchema = new Schema<TBike>(
     category: {
       type: String,
       required: [true, 'Bike category is required'],
-      enum: ['Mountain', 'Road', 'Hybrid', 'Electric'], 
+      enum: ['Mountain', 'Road', 'Hybrid', 'Electric'],
       trim: true,
     },
     description: {
@@ -40,7 +39,7 @@ const bikeSchema = new Schema<TBike>(
       required: [true, 'Stock status is required'],
     },
   },
-  { timestamps: true } 
+  { timestamps: true },
 );
 
 // Pre-save middleware
@@ -56,19 +55,25 @@ bikeSchema.post('save', function (doc, next) {
   next();
 });
 
+// query middleware
+bikeSchema.pre('find', function(next){
+  this.find({isDeleted: {$ne: true}})
+  next();
+})
 
+bikeSchema.pre('findOne', function(next){
+  this.find({isDeleted: {$ne: true}})
+  next();
+})
 
-
-// baki ache//////////////////////////delete ar pre post
-
-
-
-
+bikeSchema.pre('aggregate', function(next){
+  this.pipeline().unshift({$match: {isDeleted : {$ne: true}}});
+  next();
+})
 
 // Static method to check if a bike exists
 bikeSchema.statics.isBikeExists = async function (name: string) {
   return await this.findOne({ name });
 };
 
-
-export const Bike = model<TBike, BikeModel >('Bike', bikeSchema)
+export const Bike = model<TBike, BikeModel>('Bike', bikeSchema);

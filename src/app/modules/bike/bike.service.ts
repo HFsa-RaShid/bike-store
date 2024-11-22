@@ -14,9 +14,29 @@ const createBikeIntoDB = async (bikeData: TBike) => {
 
 }
 
+const getAllBikesFromDB = async () => {
+  const result = await Bike.find()
+  return result
+}
+
+const getSingleBikeFromDB = async (name: string) => {
+  // console.log('Searching for name:', name);
+  // const result = await Student.findOne({ name });
+  const result = await Bike.aggregate([{ $match: {name: name}}]);
+  return result
+}
+
+const deleteBikeFromDB = async (name: string) => {
+  // console.log('Searching for ID:', id);
+  const result = await Bike.updateOne({ name }, { isDeleted: true })
+  return result
+}
 
 
 export const BikeServices = {
   createBikeIntoDB,
+  getAllBikesFromDB,
+  getSingleBikeFromDB,
+  deleteBikeFromDB,
   
 }

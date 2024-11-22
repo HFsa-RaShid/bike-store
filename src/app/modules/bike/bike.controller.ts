@@ -26,6 +26,72 @@ const createBike = async (req: Request, res: Response) => {
   }
 };
 
+// get all bikes
+const getAllBikes = async (req: Request, res: Response) => {
+    try {
+      const result = await BikeServices.getAllBikesFromDB()
+      res.status(200).json({
+        success: true,
+        message: 'bikes are retrieved successfully',
+        data: result,
+      })
+    } catch (err: any) {
+      console.error("Error during bikes retrieve:", err.message); 
+      res.status(500).json({
+        success: false,
+        message: err.message || 'Something went wrong',
+        error: err,
+      });
+    }
+  }
+  
+  // get single BIKE
+  const getSingleBike = async (req: Request, res: Response) => {
+    try {
+      const { bikeName } = req.params
+      
+      const result = await BikeServices.getSingleBikeFromDB(bikeName)
+      
+      res.status(200).json({
+        success: true,
+        message: 'Bike is retrieved successfully',
+        data: result,
+      })
+    } catch (err: any) {
+      console.error("Error during bikes retrieve:", err.message); 
+      res.status(500).json({
+        success: false,
+        message: err.message || 'Something went wrong',
+        error: err,
+      });
+    }
+  }
+  
+  // delete BIKE
+  const deleteBike = async (req: Request, res: Response) => {
+    try {
+      const { bikeName } = req.params
+      const result = await BikeServices.deleteBikeFromDB(bikeName)
+   
+      res.status(200).json({
+        success: true,
+        message: 'Bike is deleted successfully',
+        data: result,
+      })
+    } catch (err: any) {
+      console.error("Error during bike deletion:", err.message); 
+      res.status(500).json({
+        success: false,
+        message: err.message || 'Something went wrong',
+        error: err,
+      });
+    }
+  }
+
 export const BikeControllers = {
   createBike,
+  getAllBikes,
+  getSingleBike,
+  deleteBike,
+  
 };

@@ -6,8 +6,8 @@ const router = express.Router()
 
 // will call controller func
 router.post('/create-bike', BikeControllers.createBike)
-// router.get('/:studentId', StudentControllers.getSingleStudent)
-// router.delete('/:studentId', StudentControllers.deleteStudent)
-// router.get('/', StudentControllers.getAllStudents)
+router.get('/:bikeName', BikeControllers.getSingleBike)
+router.delete('/:bikeName', BikeControllers.deleteBike)
+router.get('/', BikeControllers.getAllBikes)
 
 export const BikeRoutes = router
