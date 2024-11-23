@@ -71,8 +71,8 @@ const getAllBikes = async (req: Request, res: Response) => {
   // // delete BIKE
   const deleteBike = async (req: Request, res: Response) => {
     try {
-      const { bikeName } = req.params
-      const result = await BikeServices.deleteBikeFromDB(bikeName)
+      const { productId } = req.params
+      const result = await BikeServices.deleteBikeFromDB(productId)
    
       res.status(200).json({
         success: true,

@@ -38,7 +38,10 @@ const bikeSchema = new Schema<TBike>(
       type: Boolean,
       required: [true, 'Stock status is required'],
     },
-   
+    isDeleted: { 
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true },
   

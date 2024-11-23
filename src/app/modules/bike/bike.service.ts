@@ -40,8 +40,8 @@ const getSingleBikeFromDB = async (productId: string) => {
 }
 
 const deleteBikeFromDB = async (productId: string) => {
-  // console.log('Searching for ID:', id);
-  const result = await Bike.updateOne({ productId }, { isDeleted: true })
+
+  const result = await Bike.updateOne({ _id: new mongoose.Types.ObjectId(productId) }, { isDeleted: true })
   return result
 }
 

@@ -23,6 +23,7 @@ const bikeSchema = z.object({
     .number({ required_error: 'Quantity is required' })
     .min(0, 'Quantity cannot be negative'),
   inStock: z.boolean({ required_error: 'Stock status is required' }),
+  isDeleted: z.boolean().default(false),
 });
 
 export default bikeSchema;
