@@ -1,3 +1,4 @@
+
 import { Schema, model } from 'mongoose';
 import { BikeModel, TBike } from './bike/bike.interface';
 

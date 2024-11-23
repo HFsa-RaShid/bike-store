@@ -1,55 +1,67 @@
-import mongoose from "mongoose"
-import { Bike } from "../bike.model"
-import { TBike } from "./bike.interface"
 
-
+import mongoose from 'mongoose';
+import { Bike } from '../bike.model';
+import { TBike } from './bike.interface';
 
 const createBikeIntoDB = async (bikeData: TBike) => {
   //built it static method
   if (await Bike.isBikeExists(bikeData.name)) {
-    throw new Error('Bike already exists!!')
+    throw new Error('Bike already exists!!');
   }
-  const result = await Bike.create(bikeData)
+  const result = await Bike.create(bikeData);
 
-  return result
-
-}
-
-
+  return result;
+};
 
 const getAllBikesFromDB = async (searchTerm?: string) => {
   const filter: any = {};
 
   if (searchTerm) {
     filter.$or = [
-      { name: { $regex: searchTerm, $options: "i" } }, 
-      { brand: { $regex: searchTerm, $options: "i" } }, 
-      { category: { $regex: searchTerm, $options: "i" } }, 
+      { name: { $regex: searchTerm, $options: 'i' } },
+      { brand: { $regex: searchTerm, $options: 'i' } },
+      { category: { $regex: searchTerm, $options: 'i' } },
     ];
   }
 
   const result = await Bike.find(filter);
-  // console.log(result);
   return result;
 };
 
 const getSingleBikeFromDB = async (productId: string) => {
-  const result = await Bike.aggregate([{ $match: {_id: new mongoose.Types.ObjectId(productId)}}]);
-  // console.log(result);
-  return result
-}
+  const result = await Bike.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(productId) } },
+  ]);
+  return result;
+};
+
+const updateBikeFromDB = async (productId: string) => {
+  const result = await Bike.findOneAndUpdate(
+    { _id: new mongoose.Types.ObjectId(productId) },
+    { 
+      price: 1300,
+      quantity: 30 
+    },
+    {
+      new: true, 
+      runValidators: true,
+    },
+  );
+  return result;
+};
 
 const deleteBikeFromDB = async (productId: string) => {
-
-  const result = await Bike.updateOne({ _id: new mongoose.Types.ObjectId(productId) }, { isDeleted: true })
-  return result
-}
-
+  const result = await Bike.findOneAndUpdate(
+    { _id: new mongoose.Types.ObjectId(productId) },
+    { isDeleted: true },
+  );
+  return result;
+};
 
 export const BikeServices = {
   createBikeIntoDB,
   getAllBikesFromDB,
   getSingleBikeFromDB,
+  updateBikeFromDB,
   deleteBikeFromDB,
-  
-}
+};
