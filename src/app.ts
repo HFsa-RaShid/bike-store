@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(cors());
 
 // applications routes
-app.use('/api/products', BikeRoutes)
-app.use('/api/orders', OrderRoutes)
+app.use('/api/products', BikeRoutes);
+app.use('/api/orders', OrderRoutes);
 
 const getAController = (req: Request, res: Response) => {
   const a = 10;

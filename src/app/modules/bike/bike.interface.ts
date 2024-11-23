@@ -4,7 +4,7 @@ export type TBike = {
   name: string;
   brand: string;
   price: number;
-  category: 'Mountain'| 'Road'| 'Hybrid'| 'Electric';
+  category: 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
   description: string;
   quantity: number;
   inStock: boolean;
@@ -13,8 +13,5 @@ export type TBike = {
   isDeleted: boolean;
 };
 
-
 // for creating static
-export interface BikeModel extends Model<TBike> {
-  isBikeExists(name: string): Promise<TBike | null>
-}
+export interface BikeModel extends Model<TBike> {}

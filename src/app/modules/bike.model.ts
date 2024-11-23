@@ -1,4 +1,3 @@
-
 import { Schema, model } from 'mongoose';
 import { BikeModel, TBike } from './bike/bike.interface';
 
@@ -39,13 +38,12 @@ const bikeSchema = new Schema<TBike>(
       type: Boolean,
       required: [true, 'Stock status is required'],
     },
-    isDeleted: { 
+    isDeleted: {
       type: Boolean,
       default: false,
     },
   },
   { timestamps: true },
-  
 );
 
 // Pre-save middleware
@@ -62,20 +60,20 @@ bikeSchema.post('save', function (doc, next) {
 });
 
 // query middleware
-bikeSchema.pre('find', function(next){
-  this.find({isDeleted: {$ne: true}})
+bikeSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } });
   next();
-})
+});
 
-bikeSchema.pre('findOne', function(next){
-  this.find({isDeleted: {$ne: true}})
+bikeSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
   next();
-})
+});
 
-bikeSchema.pre('aggregate', function(next){
-  this.pipeline().unshift({$match: {isDeleted : {$ne: true}}});
+bikeSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
   next();
-})
+});
 
 // Static method to check if a bike exists
 bikeSchema.statics.isBikeExists = async function (name: string) {

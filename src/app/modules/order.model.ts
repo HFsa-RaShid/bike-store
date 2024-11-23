@@ -2,7 +2,8 @@
 import mongoose, { model, Schema } from 'mongoose';
 import { TOrder } from './order/order.interface';
 
-const OrderSchema = new Schema<TOrder>({
+const OrderSchema = new Schema<TOrder>(
+  {
     email: {
       type: String,
       required: true,
@@ -25,5 +26,3 @@ const OrderSchema = new Schema<TOrder>({
 );
 
 export const Order = model<TOrder>('Order', OrderSchema);
-
-

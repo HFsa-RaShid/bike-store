@@ -9,6 +9,5 @@ export type TOrder = {
   updatedAt?: Date;
 };
 
-
 // for creating static
-export interface OrderModel extends Model<TOrder>{}
+export interface OrderModel extends Model<TOrder> {}
