@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import { z } from 'zod';
 
 export const OrderSchema = z.object({
@@ -6,9 +6,10 @@ export const OrderSchema = z.object({
    .string({ message: 'Email is required.' })
     .email({ message: 'Invalid email format.' }),
   
-  product: z.instanceof(Types.ObjectId, { message: 'Product ID must be a valid ObjectId.' })
-    .refine((value) => value instanceof Types.ObjectId, {
-      message: 'Product ID is required and must be a valid ObjectId.',
+    product: z
+    .string({ message: 'Product ID is required.' })
+    .refine((value) => mongoose.isValidObjectId(value), {
+      message: 'Product ID must be a valid ObjectId.',
     }),
 
   quantity: z
