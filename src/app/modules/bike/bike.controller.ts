@@ -29,7 +29,8 @@ const createBike = async (req: Request, res: Response) => {
 // get all bikes
 const getAllBikes = async (req: Request, res: Response) => {
     try {
-      const result = await BikeServices.getAllBikesFromDB()
+      const { searchTerm } = req.query;
+      const result = await BikeServices.getAllBikesFromDB(searchTerm as string)
       res.status(200).json({
         success: true,
         message: 'bikes are retrieved successfully',
@@ -48,9 +49,9 @@ const getAllBikes = async (req: Request, res: Response) => {
   // get single BIKE
   const getSingleBike = async (req: Request, res: Response) => {
     try {
-      const { bikeName } = req.params
+      const { productId } = req.params
       
-      const result = await BikeServices.getSingleBikeFromDB(bikeName)
+      const result = await BikeServices.getSingleBikeFromDB(productId)
       
       res.status(200).json({
         success: true,
@@ -67,7 +68,7 @@ const getAllBikes = async (req: Request, res: Response) => {
     }
   }
   
-  // delete BIKE
+  // // delete BIKE
   const deleteBike = async (req: Request, res: Response) => {
     try {
       const { bikeName } = req.params
@@ -75,7 +76,7 @@ const getAllBikes = async (req: Request, res: Response) => {
    
       res.status(200).json({
         success: true,
-        message: 'Bike is deleted successfully',
+        message: 'Bike deleted successfully',
         data: result,
       })
     } catch (err: any) {

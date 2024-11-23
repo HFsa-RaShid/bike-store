@@ -38,8 +38,10 @@ const bikeSchema = new Schema<TBike>(
       type: Boolean,
       required: [true, 'Stock status is required'],
     },
+   
   },
   { timestamps: true },
+  
 );
 
 // Pre-save middleware
