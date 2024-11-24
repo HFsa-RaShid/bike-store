@@ -8,6 +8,3 @@ export type TOrder = {
   createdAt?: Date;
   updatedAt?: Date;
 };
-
-// for creating static
-// export interface OrderModel extends Model<TOrder> {}

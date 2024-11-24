@@ -1,4 +1,3 @@
-// order.model.ts
 import mongoose, { model, Schema } from 'mongoose';
 import { TOrder } from './order/order.interface';
 import { Bike } from './bike.model';

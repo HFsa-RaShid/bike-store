@@ -1,5 +1,3 @@
-// import { Model } from 'mongoose';
-
 export type TBike = {
   name: string;
   brand: string;
@@ -12,6 +10,3 @@ export type TBike = {
   updatedAt?: Date;
   isDeleted: boolean;
 };
-
-// for creating static
-// export interface BikeModel extends Model<TBike> {}

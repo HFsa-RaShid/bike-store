@@ -1,4 +1,3 @@
-// bike.service.ts
 import { TOrder } from './order.interface';
 import { Order } from '../order.model';
 const createOrderIntoDB = async (orderData: TOrder) => {

@@ -13,7 +13,7 @@ const createOrder = async (req: Request, res: Response) => {
     const productId = new mongoose.Types.ObjectId(zodParseData.product);
     await InventoryService.updateInventory(
       productId.toString(),
-      zodParseData.quantity
+      zodParseData.quantity,
     );
 
     const result = await OrderServices.createOrderIntoDB({
@@ -31,23 +31,28 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-
 const handleError = (err: unknown, res: Response) => {
   if (err instanceof z.ZodError) {
-    const validationErrors = err.errors.reduce((acc: Record<string, unknown>, error) => {
-      const path = Array.isArray(error.path) && error.path.length > 0 ? error.path.join('.') : 'unknown';
-      acc[path] = {
-        message: error.message,
-        name: 'ValidatorError',
-        properties: {
+    const validationErrors = err.errors.reduce(
+      (ordering: Record<string, unknown>, error) => {
+        const path =
+          Array.isArray(error.path) && error.path.length > 0
+            ? error.path.join('.')
+            : 'unknown';
+        ordering[path] = {
           message: error.message,
-          type: error.code,
-        },
-        kind: error.code,
-        path: path,
-      };
-      return acc;
-    }, {});
+          name: 'ValidatorError',
+          properties: {
+            message: error.message,
+            type: error.code,
+          },
+          kind: error.code,
+          path: path,
+        };
+        return ordering;
+      },
+      {},
+    );
 
     res.status(400).json({
       success: false,
@@ -69,4 +74,3 @@ const handleError = (err: unknown, res: Response) => {
 export const OrderControllers = {
   createOrder,
 };
-
