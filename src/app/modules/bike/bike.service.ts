@@ -9,7 +9,7 @@ const createBikeIntoDB = async (bikeData: TBike) => {
 };
 
 const getAllBikesFromDB = async (searchTerm?: string) => {
-  const filter: any = {};
+  const filter: Record<string, unknown> = {};
 
   if (searchTerm) {
     filter.$or = [

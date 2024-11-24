@@ -1,4 +1,3 @@
-// order.controller.ts
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { OrderServices } from './order.service';
@@ -14,7 +13,7 @@ const createOrder = async (req: Request, res: Response) => {
     const productId = new mongoose.Types.ObjectId(zodParseData.product);
     await InventoryService.updateInventory(
       productId.toString(),
-      zodParseData.quantity,
+      zodParseData.quantity
     );
 
     const result = await OrderServices.createOrderIntoDB({
@@ -32,18 +31,12 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-//  error handler function
-const handleError = (err: unknown, res: Response) => {
-  const errorResponse = {
-    success: false,
-    message: 'Something went wrong',
-    error: (err instanceof Error && err.message) || 'An error occurred',
-    stack: (err instanceof Error && err.stack) || undefined,
-  };
 
+const handleError = (err: unknown, res: Response) => {
   if (err instanceof z.ZodError) {
-    const validationErrors = err.errors.reduce((acc: any, error) => {
-      acc[error.path[0]] = {
+    const validationErrors = err.errors.reduce((acc: Record<string, unknown>, error) => {
+      const path = Array.isArray(error.path) && error.path.length > 0 ? error.path.join('.') : 'unknown';
+      acc[path] = {
         message: error.message,
         name: 'ValidatorError',
         properties: {
@@ -51,18 +44,29 @@ const handleError = (err: unknown, res: Response) => {
           type: error.code,
         },
         kind: error.code,
-        path: error.path[0],
+        path: path,
       };
       return acc;
     }, {});
 
-    errorResponse.message = 'Validation failed';
-    errorResponse.error = validationErrors;
+    res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      error: {
+        name: 'ValidationError',
+        errors: validationErrors,
+      },
+      stack: new Error().stack,
+    });
+  } else {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+    });
   }
-
-  res.status(500).json(errorResponse);
 };
 
 export const OrderControllers = {
   createOrder,
 };
+
