@@ -2,7 +2,6 @@ import express from 'express';
 import { OrderControllers } from './order.controller';
 import { RevenueControllers } from './revenue.controller';
 
-
 const router = express.Router();
 
 router.post('/create-order', OrderControllers.createOrder);

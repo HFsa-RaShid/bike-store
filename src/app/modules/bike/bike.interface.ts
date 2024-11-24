@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+// import { Model } from 'mongoose';
 
 export type TBike = {
   name: string;
@@ -14,4 +14,4 @@ export type TBike = {
 };
 
 // for creating static
-export interface BikeModel extends Model<TBike> {}
+// export interface BikeModel extends Model<TBike> {}

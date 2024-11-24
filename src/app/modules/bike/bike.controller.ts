@@ -138,7 +138,7 @@ const deleteBike = async (req: Request, res: Response) => {
 
 //  error handler function
 const handleError = (err: any, res: Response) => {
-  const errorResponse: any = {
+  const errorResponse = {
     success: false,
     message: 'Something went wrong',
     error: err.message || 'An error occurred',
@@ -186,7 +186,7 @@ export const BikeControllers = {
 // type ErrorResponse = {
 //   success: boolean;
 //   message: string;
-//   error: any | Record<string, unknown>;
+//   error: string | Record<string, unknown>;
 //   stack?: string;
 // };
 
@@ -204,7 +204,7 @@ export const BikeControllers = {
 //       message: 'Bike is created successfully',
 //       data: result,
 //     });
-//   } catch (err: unknown) {
+//   } catch (err) {
 //     handleError(err, res);
 //   }
 // };
@@ -362,12 +362,7 @@ export const BikeControllers = {
 
 //     errorResponse.message = 'Validation failed';
 //     errorResponse.error = validationErrors;
-//   } else if (err instanceof Error) {
-//     errorResponse.message = err.message || 'An unexpected error occurred';
-//     errorResponse.error = err;
-//     errorResponse.stack = err.stack;
 //   }
-
 //   res.status(500).json(errorResponse);
 // };
 

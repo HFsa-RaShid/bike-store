@@ -1,4 +1,4 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose from 'mongoose';
 
 export type TOrder = {
   email: string;
@@ -10,4 +10,4 @@ export type TOrder = {
 };
 
 // for creating static
-export interface OrderModel extends Model<TOrder> {}
+// export interface OrderModel extends Model<TOrder> {}

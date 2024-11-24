@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { BikeModel, TBike } from './bike/bike.interface';
+import { TBike } from './bike/bike.interface';
 
 const bikeSchema = new Schema<TBike>(
   {
@@ -75,9 +75,9 @@ bikeSchema.pre('aggregate', function (next) {
   next();
 });
 
-// Static method to check if a bike exists
-bikeSchema.statics.isBikeExists = async function (name: string) {
-  return await this.findOne({ name });
-};
+// Static method to check if a bike exists//////////////bad
+// bikeSchema.statics.isBikeExists = async function (name: string) {
+//   return await this.findOne({ name });
+// };
 
-export const Bike = model<TBike, BikeModel>('Bike', bikeSchema);
+export const Bike = model<TBike>('Bike', bikeSchema);
