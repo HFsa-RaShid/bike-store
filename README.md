@@ -1,28 +1,47 @@
+# Bike Store API with Express and TypeScript
+
+This project is an Express-based application built with TypeScript and integrates MongoDB using Mongoose. The goal is to create a bike store management system, where we manage products (bikes) and orders. It implements CRUD operations for products and orders, along with proper error handling and inventory management.
+
+# Features
++ **Bike Management:** Create, read, update, and delete bikes in the store.
++ **Order Management:** Allow users to place orders for bikes and automatically update inventory.
++ **Revenue Calculation:** Calculate the total revenue generated from all orders using MongoDB aggregation.
++ **Mongoose Schema Validation:** Ensure data integrity for bike and order details using Mongoose schemas.
++ **Error Handling:** Provide detailed error responses for invalid requests and stock shortages.
+
+# Technology Stack
++ **Backend Framework:** Express.js
++ **Programming Language:** TypeScript
++ **Database:** MongoDB (with Mongoose)
++ **API Format:** RESTful API
+
+
+# Setup Instructions
++ **Step 1:** Clone the repository
+Clone this repository to your local machine using the following command:
+
 ```
-npm init -y
-npm install express
-npm install mongoose --save
-npm install typescript --save-dev
-npm i cors
-npm i dotenv
-tsc -init
-
-npm i -D eslint@9.14.0 @eslint/js @types/eslint__js typescript typescript-eslint
-npx eslint --init   
-//(keyboard i key press to convert tik browser to node)
-
-At this point you may see that your version of eslint: "^9.14.0" has been changed to eslint: "^9.15.0"
-
-if that happens remove the eslint :
- npm remove eslint
-Then re-install: 
-npm i -D eslint@9.14.0
-npm install --save-dev prettier
-
-npm install --save-dev eslint-config-prettier
-
-npm i ts-node-dev --save-dev
-ts-node-dev --respawn --transpile-only src/server.ts
-
-npm install zod
+https://github.com/HFsa-RaShid/bike-store
 ```
++ **Step 2:** Navigate to the project directory:
+
+```
+cd bike-store
+```
+
++ **Step 3:** Install dependencies:
+```
+npm install
+```
++ **Step 4:** Create an .env file in the root of the project and add the following:
+```
+NODE_ENV = development
+PORT = 5000
+DATABASE_URL = mongodb+srv://bike-store:wGIYaOMVHOflmzOO@cluster0.aq8mwv9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+```
+
++ **Step 5:** Run the application:
+```
+npm run start:dev
+```
+
