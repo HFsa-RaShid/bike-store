@@ -14,9 +14,9 @@ app.use('/api/products', BikeRoutes);
 app.use('/api/orders', OrderRoutes);
 
 const getAController = (req: Request, res: Response) => {
-  res.status(200).json({
+  res.json({
     message: 'Welcome to the Bike-Store API Service',
-  })
+  });
 };
 
 app.get('/', getAController);
